@@ -1,0 +1,17 @@
+﻿SymbolSet k = { "k" }
+SymbolSet K = { "K" }
+
+GrammarElement <C> START = k
+GrammarElement <C> END = K
+GrammarElement <M> kORK = k or K
+GrammarElement <C> BYTE = kORK kORK kORK kORK kORK kORK kORK kORK
+GrammarElement <C> VARBYTE = "KK" BYTE
+GrammarElement <M> DATA = VARBYTE or BYTE
+GrammarElement <C> PRINT = "kK " DATA* END
+GrammarElement <C> INPUT = "KKKK " BYTE END
+GrammarElement <C> DECLR = "kkkk " VARBYTE K
+GrammarElement <M> STMT = DECLR or PRINT or INPUT
+GrammarElement <C> CODE = STMT*
+GrammarElement <C> PROGRAM = START CODE END
+
+StartSymbol = PROGRAM
